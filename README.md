@@ -58,6 +58,15 @@ values may also work, as long as (I believe) 2 GB is available for Oracle.
 If you want to raise the default number of connections oracle xe check: [Raise OracleXE Connections]
 `ALTER SYSTEM SET processes=200 scope=spfile` (and restart the DB)
 
+You might also want to set the passwords to not expire: [Disable Oracle Passwords]
+
+    ALTER PROFILE DEFAULT LIMIT
+      FAILED_LOGIN_ATTEMPTS UNLIMITED
+      PASSWORD_LIFE_TIME UNLIMITED;
+      
+    NOAUDIT ALL;
+    DELETE FROM SYS.AUD$;
+
 [Vagrant]: http://www.vagrantup.com/
 
 [Puppet]: http://puppetlabs.com/
@@ -71,3 +80,5 @@ If you want to raise the default number of connections oracle xe check: [Raise O
 [vbguest]: https://github.com/dotless-de/vagrant-vbguest
 
 [Raise OracleXE Connections]: http://stackoverflow.com/questions/906541/how-many-connections-can-oracle-express-edition-xe-handle
+
+[Disable Oracle Passwords]: http://www.odi.ch/weblog/posting.php?posting=520
