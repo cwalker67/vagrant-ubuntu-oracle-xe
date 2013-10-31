@@ -14,9 +14,9 @@ Vagrant.configure("2") do |config|
   
 
   config.vm.network :forwarded_port, guest: 1521, host: 1521
-  config.vm.synced_folder "/Users/cwalker/workspaces/ge/ge-data-management/database", "/gdm/database",  :extra => 'dmode=555,fmode=555'
-  config.vm.synced_folder "/Users/cwalker/workspaces/ge/ge-data-management/dbUpdates", "/gdm/dbUpdates",  :extra => 'dmode=555,fmode=555'
-  config.vm.synced_folder "/Users/cwalker/workspaces/ge/etl-tools", "/gdm/etl-tools",  :extra => 'dmode=555,fmode=555'
+  config.vm.synced_folder "/Users/cwalker/workspaces/ge/ge-data-management/database", "/gdm/database",  :mount_options => ['dmode=555,fmode=555']
+  config.vm.synced_folder "/Users/cwalker/workspaces/ge/ge-data-management/dbUpdates", "/gdm/dbUpdates",  :mount_options => ['dmode=555,fmode=555']
+  config.vm.synced_folder "/Users/cwalker/workspaces/ge/etl-tools", "/gdm/etl-tools",  :mount_options => ['dmode=555,fmode=555']
 
 
 
@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |vb|
      vb.customize ["modifyvm", :id, "--cpus", 4]
      vb.customize ["modifyvm", :id, "--name", "oracle", "--memory", "4096"]
+     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
  
   end
 
